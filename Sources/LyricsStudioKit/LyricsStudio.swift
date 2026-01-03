@@ -4,7 +4,12 @@ import Foundation
 import MusicKit
 
 public final class LyricsStudio {
-    /// Fetches all of Cider's Lyric Studio with the matching id
+    /// Fetches all of Cider's Lyrics Studio with the matching id
+    ///
+    /// - Returns: Community-made array of  ``StudioLyricResponse``
+    /// - Throws: May throw multiple errors:
+    ///     - ``LyricsStudioError/badURL(_:)`` - The URL with the `id` is malformed or incorrect
+    ///     - ``LyricsStudioError/responseError(_:)`` - The HTTP response gave back an error
     public static func fetchAllLyrics(for id: String) async throws -> [StudioLyricResponse] {
         guard let url = URL(string: "https://taproom.cider.sh/api/v1/lyrics/track/\(id)/all") else { throw LyricsStudioError.badURL(nil) }
 
