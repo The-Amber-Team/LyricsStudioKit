@@ -12,14 +12,15 @@ struct LyricsStudioKitTests {
         "1863593386",
         "1861830402",
         "1770571677",
-        "1796149669"
+        "1796149669",
+        "1858973322"
     ]
 
     @Test("Fetch lyrics for active test ids", arguments: LyricsStudioKitTests.testActiveIds)
     func fetchTestActiveLyrics(id: String) async throws {
         do {
             let lyrics = try await LyricsStudio.fetchAllLyrics(for: id)
-            #expect(!lyrics.isEmpty)
+            #expect(lyrics[0].id > 0)
         } catch {
             print(error)
         }
