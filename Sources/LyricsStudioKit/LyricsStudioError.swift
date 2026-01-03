@@ -2,7 +2,7 @@
 
 import Foundation
 
-enum LyricStudioError: Error {
+public enum LyricsStudioError: Error {
     case badURL(String?)
     case responseError(String?)
 
