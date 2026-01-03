@@ -9,6 +9,7 @@ Simple as it is:
 ```swift
 import MusicKit
 
+// Fetches the most viewed lyrics out of them all
 func getBestLyrics() async throws -> StudioLyricResponse {
     let trackId: String = "1683380777" // i remember - bbno$
 
