@@ -17,7 +17,7 @@ func getBestLyrics() async throws -> StudioLyricResponse {
     let allLyrics: [StudioLyricResponse] = try await LyricsStudio.fetchAllLyrics(for: trackId)
 
     guard !allLyrics.isEmpty else { fatalError("No lyrics for \(trackId)") }
-    return allLyrics.sorted(by: { $0.accessCount > $1.accessCount })[0]
+    return allLyrics.sorted(by: >)[0]
 }
 ```
 
