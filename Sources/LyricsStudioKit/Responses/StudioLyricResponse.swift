@@ -2,19 +2,35 @@
 
 import Foundation
 
-public struct StudioLyricResponse: Identifiable, Decodable {
+public struct StudioLyricResponse: Identifiable, Decodable, Equatable, Comparable {
+    /// The submitted lyric identifier
     public let id: Int
+
+    /// The Apple Music track identifier
     public let trackId: String
+
     public let trackName: String
     public let artistName: String
     public let albumName: String
+
+    /// The duration of the track in seconds, converted from milliseconds
     public let trackDuration: TimeInterval
+
+    /// The lyrics' TTML
     public let ttml: String
+
     public let language: String
+
+    /// The track's lyrics' writers
+    /// - Note: This is not the author of the submitted lyrics
     public let writers: [String]
+
     public let syncType: Self.SyncType
     public let source: String
+
+    /// The number of views this submitted lyrics has in total
     public let accessCount: Int
+
     public let submittedBy: Int?
 
     public init(from decoder: any Decoder) throws {
@@ -55,5 +71,25 @@ public struct StudioLyricResponse: Identifiable, Decodable {
     public enum SyncType: String, Decodable {
         case beatByBeat = "syllable"
         case lineByLine = "line"
+    }
+
+    public static func >(lhs: Self, rhs: Self) -> Bool {
+        return lhs.accessCount > rhs.accessCount
+    }
+
+    public static func >=(lhs: Self, rhs: Self) -> Bool {
+        return lhs.accessCount >= rhs.accessCount
+    }
+
+    public static func <(lhs: Self, rhs: Self) -> Bool {
+        return lhs.accessCount < rhs.accessCount
+    }
+
+    public static func <=(lhs: Self, rhs: Self) -> Bool {
+        return lhs.accessCount <= rhs.accessCount
+    }
+
+    public static func ==(lhs: Self, rhs: Self) -> Bool {
+        return lhs.id == rhs.id
     }
 }

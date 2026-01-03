@@ -3,8 +3,10 @@
 import Foundation
 
 public struct StudioTrackAllResponse: Decodable {
+    /// The total amount of lyrics for that ``trackId``
     public let count: Int
     public let lyrics: [StudioLyricResponse]
+    /// The Apple Music track identifier
     public let trackId: String
 
     public init(from decoder: any Decoder) throws {
