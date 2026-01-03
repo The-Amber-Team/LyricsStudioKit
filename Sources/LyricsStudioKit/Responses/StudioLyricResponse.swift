@@ -19,10 +19,7 @@ public struct StudioLyricResponse: Identifiable, Decodable {
 
     public init(from decoder: any Decoder) throws {
         let container: KeyedDecodingContainer<Self.CodingKeys> = try decoder.container(keyedBy: CodingKeys.self)
-
-        let idStr: String = try container.decode(String.self, forKey: .id)
-        self.id = Int(idStr) ?? 0
-
+        self.id = try container.decode(Int.self, forKey: .id)
         self.trackId = try container.decode(String.self, forKey: .trackId)
         self.trackName = try container.decode(String.self, forKey: .trackName)
         self.artistName = try container.decode(String.self, forKey: .artistName)
