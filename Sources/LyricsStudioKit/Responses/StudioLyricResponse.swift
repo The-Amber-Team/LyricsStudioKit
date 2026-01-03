@@ -24,7 +24,7 @@ public struct StudioLyricResponse: Identifiable, Decodable {
         self.trackName = try container.decode(String.self, forKey: .trackName)
         self.artistName = try container.decode(String.self, forKey: .artistName)
         self.albumName = try container.decode(String.self, forKey: .albumName)
-        self.trackDuration = try container.decode(TimeInterval.self, forKey: .trackDuration)
+        self.trackDuration = try container.decode(TimeInterval.self, forKey: .trackDuration) / 1000
         self.ttml = try container.decode(String.self, forKey: .ttml)
         self.language = try container.decode(String.self, forKey: .language)
         self.writers = try container.decode([String].self, forKey: .writers)
