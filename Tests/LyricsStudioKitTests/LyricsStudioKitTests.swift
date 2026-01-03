@@ -20,7 +20,21 @@ struct LyricsStudioKitTests {
     func fetchTestActiveLyrics(id: String) async throws {
         do {
             let lyrics = try await LyricsStudio.fetchAllLyrics(for: id)
-            #expect(lyrics[0].id > 0)
+            #expect(lyrics[0].id > 0 && !lyrics.isEmpty)
+        } catch {
+            print(error)
+        }
+    }
+
+    @Test("Best lyrics for active test ids", arguments: LyricsStudioKitTests.testActiveIds)
+    func getBestLyrics(id: String) async throws {
+        do {
+            let lyrics = try await LyricsStudio.fetchAllLyrics(for: id)
+            try #require(!lyrics.isEmpty)
+
+            let best = lyrics.sorted(by: >)[0] // using `Comparable`
+            let theoBest = lyrics.sorted(by: { $0.accessCount > $1.accessCount })[0] // theoretical best, using actual var
+            #expect(best == theoBest)
         } catch {
             print(error)
         }
