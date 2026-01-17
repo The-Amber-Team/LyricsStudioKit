@@ -1,6 +1,9 @@
-# LyricsStudioKit
+<div align="center">
+    <h1>LyricsStudioKit</h1>
+    <img width=128 height=128 src="./data/LyricsStudioKit_Icon.png" alt="LyricsStudioKit Icon"/>
+</div>
 
-Fetch lyrics from Cider's Lyrics Studio
+Fetch lyrics from [Cider](https://cider.sh/)'s Lyrics Studio
 
 ## Usage
 
@@ -8,6 +11,7 @@ Simple as it is:
 
 ```swift
 import MusicKit
+import LyricsStudioKit
 
 // Fetches the most viewed lyrics out of them all
 func getBestLyrics() async throws -> StudioLyricResponse {
