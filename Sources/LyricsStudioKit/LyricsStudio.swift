@@ -28,9 +28,10 @@ public final class LyricsStudio {
 
     /// Fetches the most appropriate Cider lyrics with the matching id
     ///
-    /// Cider provides a `exp-rise.cider.sh` endpoint to fetch lyrics for a given Apple Music track id. It is unknown how this endpoint works in harmony with the [Lyrics Studio on Taproom](https://taproom.cider.sh/lyrics), but it does. Though it might be better to use the ``fetchAllLyrics(for: String)`` function and manually get the most viewed lyrics.
+	/// - Note: Using this method, causes the lyrics' view count to go one up in Taproom.
+	///
+    /// Cider provides a `exp-rise.cider.sh` endpoint to fetch lyrics for a given Apple Music track id. It is unknown how this endpoint works in harmony with the [Lyrics Studio on Taproom](https://taproom.cider.sh/lyrics). Though it might be better to use the ``fetchAllLyrics(for: String)`` function and manually get the most viewed lyrics.
     ///
-    /// This function also increments the ``StudioLyricResponse/accessCount``.
     ///
     /// - Returns: A privately Cider-chosen ``StudioLyricResponse``
     /// - Throws: May throw multiple errors:
