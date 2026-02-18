@@ -11,10 +11,10 @@ public struct StudioLyricResponse: Identifiable, Decodable, Equatable, Comparabl
 
     public let trackName: String
     public let artistName: String
-    public let albumName: String
+    public let albumName: String?
 
     /// The duration of the track in seconds, converted from milliseconds
-    public let trackDuration: TimeInterval
+    public let trackDuration: TimeInterval?
 
     /// The lyrics' TTML
     public let ttml: String
@@ -23,7 +23,7 @@ public struct StudioLyricResponse: Identifiable, Decodable, Equatable, Comparabl
 
     /// The track's lyrics' writers
     /// - Note: This is not the author of the submitted lyrics
-    public let writers: [String]
+    public let writers: [String]?
 
     public let syncType: Self.SyncType
     public let source: String
@@ -39,11 +39,16 @@ public struct StudioLyricResponse: Identifiable, Decodable, Equatable, Comparabl
         self.trackId = try container.decode(String.self, forKey: .trackId)
         self.trackName = try container.decode(String.self, forKey: .trackName)
         self.artistName = try container.decode(String.self, forKey: .artistName)
-        self.albumName = try container.decode(String.self, forKey: .albumName)
-        self.trackDuration = try container.decode(TimeInterval.self, forKey: .trackDuration) / 1000
+        self.albumName = try container.decodeIfPresent(String.self, forKey: .albumName)
+		let duration: TimeInterval? = try container.decodeIfPresent(TimeInterval.self, forKey: .trackDuration)
+		if let duration {
+			self.trackDuration = duration / 1000
+		} else {
+			self.trackDuration = nil
+		}
         self.ttml = try container.decode(String.self, forKey: .ttml)
         self.language = try container.decode(String.self, forKey: .language)
-        self.writers = try container.decode([String].self, forKey: .writers)
+        self.writers = try container.decodeIfPresent([String].self, forKey: .writers)
         self.syncType = try container.decode(StudioLyricResponse.SyncType.self, forKey: .syncType)
         self.source = try container.decode(String.self, forKey: .source)
         self.accessCount = try container.decode(Int.self, forKey: .accessCount)
