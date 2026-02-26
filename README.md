@@ -26,4 +26,4 @@ func getBestLyrics() async throws -> StudioLyricResponse {
 ```
 
 ## Copyright
-© Lumaa 2026
+© Amber Team 2026
