@@ -24,7 +24,7 @@ public final class LyricsStudio {
         req.httpMethod = "GET"
 
         let response = try await URLSession.shared.data(for: req)
-        if let http = response.1 as? HTTPURLResponse, http.statusCode > 299 || http.statusCode < 200 {
+		if let http = response.1 as? HTTPURLResponse, (200...299).contains(http.statusCode) {
             throw LyricsStudioError.responseError(String(data: response.0, encoding: .utf8))
         }
 
@@ -50,7 +50,7 @@ public final class LyricsStudio {
         req.httpMethod = "GET"
 
         let response = try await URLSession.shared.data(for: req)
-		if let http = response.1 as? HTTPURLResponse, http.statusCode > 299 || http.statusCode < 200 {
+		if let http = response.1 as? HTTPURLResponse, (200...299).contains(http.statusCode) {
             throw LyricsStudioError.responseError(String(data: response.0, encoding: .utf8))
         }
 
@@ -72,7 +72,7 @@ public final class LyricsStudio {
 		req.httpMethod = "GET"
 
 		let response = try await URLSession.shared.data(for: req)
-		if let http = response.1 as? HTTPURLResponse, http.statusCode > 299 || http.statusCode < 200 {
+		if let http = response.1 as? HTTPURLResponse, (200...299).contains(http.statusCode) {
 			throw LyricsStudioError.responseError(String(data: response.0, encoding: .utf8))
 		}
 
