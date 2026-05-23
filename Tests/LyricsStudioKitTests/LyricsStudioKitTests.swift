@@ -11,7 +11,14 @@ struct LyricsStudioKitTests {
         "1742010853",
         "1721171510",
         "1863593386",
+		"1834233575"
     ]
+
+	@Test("Fetch preferred lyrics for active test ids", arguments: LyricsStudioKitTests.testActiveIds)
+	func fetchTestActiveLyric(id: String) async throws {
+		let lyrics = try await LyricsStudio.fetchLyrics(for: MusicItemID(rawValue: id))
+		#expect(lyrics.ttml.count > 0)
+	}
 
     @Test("Fetch lyrics for active test ids", arguments: LyricsStudioKitTests.testActiveIds)
     func fetchTestActiveLyrics(id: String) async throws {
